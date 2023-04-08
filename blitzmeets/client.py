@@ -6,11 +6,11 @@ class MeetClient:
     def __init__(self) -> None:
         self.base_url = "https://brie.fi/ng"
 
-    def create_meet(self):
+    def create_meet(self) -> str:
         unique_id = token_hex(4)
         return f"{self.base_url}/{unique_id[:3:]}-{unique_id[3:6]}-{unique_id[6:]}"
 
-    def create_qr_code(self):
+    def create_qr_code(self) -> bytes:
         meet_link = self.create_meet()
         qr = qrcode.QRCode(version=1, box_size=10, border=4)
         qr.add_data(meet_link)
