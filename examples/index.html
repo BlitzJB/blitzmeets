@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>QR Code Generator</title>
+</head>
+<body>
+	<h1>QR Code Generator</h1>
+	<div id="qr-code-container"></div>
+
+	<script>
+		// Make an AJAX request to the Flask server to get the QR code image
+		var xhr = new XMLHttpRequest();
+		xhr.open('GET', '/qr_code');
+		xhr.responseType = 'blob';
+		xhr.onload = function() {
+			// When the response is loaded, create a new URL object with the response data
+			var blobUrl = URL.createObjectURL(xhr.response);
+
+			// Create an <img> element and set its source to the blob URL
+			var img = document.createElement('img');
+			img.src = blobUrl;
+
+			// Add the <img> element to the page
+			document.getElementById('qr-code-container').appendChild(img);
+		};
+		xhr.send();
+	</script>
+</body>
+</html>
